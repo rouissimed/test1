@@ -1,0 +1,74 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+  <form [formGroup]="registerForm" (ngSubmit)="register()">
+
+    <div class="row my-3">
+      <div class="col-6 form-group">
+
+        <input type="text" class="form-control" placeholder="First name" name="nom" formControlName="nom">
+
+        <div *ngIf="nom.touched && nom.invalid" class="alert alert-danger mt-3">
+          <div *ngIf="nom.errors.required">le nom doit etre obligatoire</div>
+          <div *ngIf="nom.errors.pattern">le nom doit etre alphabetique</div>
+        </div>
+
+      </div>
+
+      <div class="col-6 form-group">
+        <input type="text" class="form-control" placeholder="Last name" name="prenom" formControlName="prenom">
+
+        <div *ngIf="prenom.touched && prenom.invalid" class="alert alert-danger mt-3">
+          <div *ngIf="prenom.errors.required">le prenom doit etre obligatoire</div>
+          <div *ngIf="prenom.errors.pattern">le prenom doit etre alphabetique</div>
+        </div>
+
+      </div>
+
+      <div class="col-6 form-group">
+        <input type="text" class="form-control" placeholder="Tel" name="tel" formControlName="tel">
+
+        <div *ngIf="tel.touched && tel.invalid" class="alert alert-danger mt-3">
+          <div *ngIf="tel.errors.required">le tel est obligatoire</div>
+          <div *ngIf="tel.errors.minlength">le tel doitre avoir au min 8 caracteres</div>
+          <div *ngIf="tel.errors.maxlength">le tel doitre avoir au max 13 caracteres</div>
+          <div *ngIf="tel.errors.pattern">le tel doit etre numerique</div>
+        </div>
+
+      </div>
+
+      <div class="col-6 form-group">
+        <input type="text" class="form-control" placeholder="Email" name="email" formControlName="email">
+
+        <div *ngIf="email.touched && email.invalid" class="alert alert-danger mt-3">
+          <div *ngIf="email.errors.required">le mail est obligatoire</div>
+          <div *ngIf="email.errors.email">le mail doit etre valide </div>
+        </div>
+      </div>
+
+      <div class="col-6 form-group">
+        <input type="text" class="form-control" placeholder="password" name="password" formControlName="password">
+        <div *ngIf="password.touched && password.invalid" class="alert alert-danger mt-3">
+          <div *ngIf="password.errors.required">le password est obligatoire</div>
+          <div *ngIf="password.errors.minlength">le password doitre avoir au min 8 caracteres</div>
+        </div>
+      </div>
+
+      <div class="col-6 form-group">
+        <input type="text" class="form-control" placeholder="Re password" name="reppassword"
+          formControlName="reppassword">
+          <div *ngIf="reppassword.touched && reppassword.invalid" class="alert alert-danger mt-3">
+              <div *ngIf="reppassword.errors.required">le reppassword est obligatoire</div>
+
+            </div>
+        <div *ngIf="reppassword.valid && password.value != reppassword.value" class="alert alert-danger mt-3">
+          Mot de passe sont différents
+        </div>
+      </div>
+
+      <button class="btn btn-primary my-3" type="submit" [disabled]='registerForm.invalid'>Register</button>
+    </div>
+  </form>
+</div>
+
+<app-footer></app-footer>

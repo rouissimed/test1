@@ -1,0 +1,88 @@
+<app-navbar></app-navbar>
+<div class="container">
+
+    <button class="btn btn-info my-3" routerLink="/add-todo">Ajouter Todo</button>
+    <h2>Todo List</h2>
+    <div *ngIf="todoList.length > 0 ; then todo else notodo"></div>
+    <ng-template #todo>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Num</th>
+                    <th>Titre</th>
+                    <th>Date d'ajout</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let todo of todoList">
+                    <th>{{todo.num}}</th>
+                    <td>{{todo.titre}}</td>
+                    <td>{{todo.dateAjout}}</td>
+                    <td>
+                        <button class="btn btn-success" (click)="DoneTodo(todo)">Terminer</button>
+                        <button class="btn btn-warning mx-3" routerLink="/update-todo">Modifier</button>
+                        <button class="btn btn-danger" (click)="deleteTodo(todo)">Supprimer</button>
+                    </td>
+
+                </tr>
+            </tbody>
+
+
+
+
+        </table>
+    </ng-template>
+    <ng-template #notodo>
+        <div class="alert alert-warning">
+            Aucune todo
+        </div>
+    </ng-template>
+
+
+    <hr>
+
+    
+    <h2>Dones</h2>
+    
+    <div *ngIf="todoList.length > 0 ; then done else notdone"></div>
+
+    <ng-template #done>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Num</th>
+                <th>Titre</th>
+                <th>Date d'ajout</th>
+                <th>Date fin</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let done of doneList">
+                
+                <td><input [(ngModel)]="done.num" class="form-control" type="text" name="{{done.num}}" />
+                </td>
+                <td>
+
+                    <button class="btn btn-danger" (click)="deleteTodo(done)">Supprimer</button>
+                </td>
+
+            </tr>
+        </tbody>
+
+
+
+
+    </table>
+    </ng-template>
+
+
+    <ng-template #notdone>
+        <div class="alert alert-warning">
+            Aucune Dones
+        </div>
+    </ng-template>
+</div>
+
+<app-footer></app-footer>
